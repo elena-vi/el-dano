@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  el-dano:
+    container_name: el-dano
+    build:
+      context: .
+      dockerfile: Dockerfile_app
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+    command: 'npm start'
+  storybook:
+    container_name: el-dano-storybook
+    build:
+      context: .
+      dockerfile: Dockerfile_storybook
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+        - '6006:6006'
+    environment:
+      - NODE_ENV=development
+    command: 'npm run storybook'
